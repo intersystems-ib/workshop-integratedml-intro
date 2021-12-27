@@ -2,3 +2,5 @@
 obj
 bin
 *.bak
+data/train.csv
+data/test.csv
