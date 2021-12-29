@@ -16,7 +16,7 @@ https://www.kaggle.com/csafrit2/maternal-health-risk-data
 We have already included in the repository a [data file](data/maternal_health_risk.csv).
 
 
-## (b). Split training and test data
+## (b). Split training and test data
 We need to split the [data](data/maternal_health_risk.csv) into training and test datasets. Prepare data simply split the data and generate a train and test CSV files. Have a look at the [code](src/Workshop/Util.cls) using Embedded Python.
 
 ```
