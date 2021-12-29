@@ -31,21 +31,21 @@ do ##class(community.csvgen).Generate("/app/data/train.csv",",","Workshop.Data.M
 do ##class(community.csvgen).Generate("/app/data/test.csv",",","Workshop.Data.MaternalTest")
 ```
 
-# Create your model
+# (d). Create your model
 Create a model to predict `RiskLevel`:
 
 ```
 CREATE MODEL MaternalModel PREDICTING (RiskLevel) FROM Workshop_Data.MaternalTrain
 ```
 
-# Training the model
+# (e). Training the model
 You can now train the model using the training data
 
 ```
 TRAIN MODEL MaternalModel
 ```
 
-# Validating the model
+# (f). Validating the model
 Evaluate the performance of the predictions of your model
 
 ```
@@ -56,7 +56,7 @@ VALIDATE MODEL MaternalModel FROM Workshop_Data.MaternalTest
 SELECT * FROM INFORMATION_SCHEMA.ML_VALIDATION_METRICS
 ```
 
-# Using the model
+# (g). Using the model
 Finally you can run predictions on RiskLevel. Here you can compare the predictions Vs. real data:
 
 ```
