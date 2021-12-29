@@ -1,6 +1,7 @@
 Class Workshop.Util Extends %RegisteredObject
 {
 
+/// Use sklearn to split data into a training and test set
 /// do ##class(Workshop.Util).PrepareData()
 ClassMethod PrepareData() As %Status [ Language = python ]
 {
