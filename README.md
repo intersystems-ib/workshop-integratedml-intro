@@ -1,5 +1,8 @@
 Intro to automated machine learning directly from SQL using IntegratedML feature in InterSystems IRIS. You can find more information in the [documentation](https://docs.intersystems.com/irisforhealthlatest/csp/docbook/DocBook.UI.Page.cls?KEY=GIML_Intro)
 
+<img src="img/demo-integratedml.gif" width="800px"/>
+
+Have a look at the slides in [Workshop-IntegratedML-Intro.pdf](Workshop-IntegratedML-Intro.pdf)
 
 # Setup
 Run the container we will use as our IRIS instance:
