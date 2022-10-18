@@ -3,16 +3,16 @@ FROM $IMAGE
 
 USER root
 
+# copy source
+COPY iris.script iris.script
+COPY src src
+COPY data data
+
 # change ownership
 RUN chown -R ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /opt/irisapp
 WORKDIR /opt/irisapp
 
 USER ${ISC_PACKAGE_MGRUSER}
-
-# copy source
-COPY iris.script iris.script
-COPY src src
-COPY data data
 
 # run iris.script
 RUN iris start IRIS \
