@@ -14,3 +14,4 @@ services:
     - "1972:1972"
     volumes:
     - .:/app
+    command: --check-caps false
