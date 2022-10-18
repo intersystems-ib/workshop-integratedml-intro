@@ -10,6 +10,8 @@ Run the container we will use as our IRIS instance:
 docker-compose up -d
 ```
 
+After that, you should be able to access to [Management Portal](http://localhost:52773/csp/sys/UtilHome.csp).
+
 # Prepare the data
 
 ## (a). Check the data
@@ -21,6 +23,8 @@ We have already included in the repository a [data file](data/maternal_health_ri
 
 ## (b). Split training and test data
 We need to split the [data](data/maternal_health_risk.csv) into training and test datasets. Prepare data simply split the data and generate a train and test CSV files. Have a look at the [code](src/Workshop/Util.cls) using Embedded Python.
+
+Run the method in a [WebTerminal](http://localhost:52773/terminal/) session.
 
 ```
 do ##class(Workshop.Util).PrepareData()
@@ -35,6 +39,8 @@ do ##class(community.csvgen).Generate("/app/data/test.csv",",","Workshop.Data.Ma
 ```
 
 # (d). Create your model
+IntegratedML feature works directly in SQL. You can use the [SQL Explorer](http://localhost:52773/csp/sys/exp/%25CSP.UI.Portal.SQL.Home.zen?$NAMESPACE=WORKSHOP) in the Management Portal or use an external JDBC tool like SQLTools for VS Code.
+
 Create a model to predict `RiskLevel`:
 
 ```
