@@ -26,15 +26,17 @@ We need to split the [data](data/maternal_health_risk.csv) into training and tes
 
 Run the method in a [WebTerminal](http://localhost:52773/terminal/) session.
 
-```
+```objectscript
 do ##class(Workshop.Util).PrepareData()
 ```
 
 ## (c). Load CSV files
 We will use [csvgen](https://openexchange.intersystems.com/package/csvgen) to create persistent classes and load data from CSV files. 
 
-```
+```objectscript
 do ##class(community.csvgen).Generate("/app/data/train.csv",",","Workshop.Data.MaternalTrain")
+```
+```objectscript
 do ##class(community.csvgen).Generate("/app/data/test.csv",",","Workshop.Data.MaternalTest")
 ```
 
@@ -61,13 +63,13 @@ Evaluate the performance of the predictions of your model
 VALIDATE MODEL MaternalModel FROM Workshop_Data.MaternalTest
 ```
 
-```
+```sql
 SELECT * FROM INFORMATION_SCHEMA.ML_VALIDATION_METRICS
 ```
 
 # (g). Using the model
 Finally you can run predictions on RiskLevel. Here you can compare the predictions Vs. real data:
 
-```
+```sql
 SELECT *, PREDICT(MaternalModel) AS PredictedRisk FROM Workshop_Data.MaternalTest
 ```
