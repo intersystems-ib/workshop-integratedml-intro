@@ -4,3 +4,4 @@ bin
 *.bak
 data/train.csv
 data/test.csv
+data/hl7/hl7files/*
