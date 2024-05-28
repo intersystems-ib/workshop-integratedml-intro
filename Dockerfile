@@ -1,9 +1,11 @@
-ARG IMAGE=intersystemsdc/irishealth-ml-community:2022.2.0.368.0-zpm
+ARG IMAGE=containers.intersystems.com/intersystems/iris-ml-community:2024.1
 FROM $IMAGE
 
 USER root
 
 # copy source
+RUN mkdir -p /opt/irisapp
+WORKDIR /opt/irisapp
 COPY iris.script iris.script
 COPY src src
 COPY data data

@@ -1,21 +1,13 @@
     // unexpire passwords for dev mode
     zn "%SYS"
     Do ##class(Security.Users).UnExpireUserPasswords("*")
+    
+    // install zpm
+    set r=##class(%Net.HttpRequest).%New(),r.Server="pm.community.intersystems.com",r.SSLConfiguration="ISC.FeatureTracker.SSL.Config" d r.Get("/packages/zpm/latest/installer"),$system.OBJ.LoadStream(r.HttpResponse.Data,"c")
 
-    zn "%SYS" 
-    do $SYSTEM.OBJ.Load("/opt/irisapp/src/Workshop/Installer.cls", "ck") 
-  
-    // run installer: setup environment
-    set sc = ##class(Workshop.Installer).Run(.vars) 
-  
-    zn "WORKSHOP"
-    
-    // install zpm apps
-    zpm "install csvgen"
-    zpm "install webterminal"
-    
     // load source
+    zn "USER"
+    zpm "install webterminal"
     set sc = $SYSTEM.OBJ.LoadDir("/opt/irisapp/src", "ck", .errorlog, 1)
-    
 
     halt

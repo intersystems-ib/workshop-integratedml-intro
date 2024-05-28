@@ -33,33 +33,80 @@ do ##class(Workshop.Util).PrepareData()
 ## (c). Load CSV files
 We will use [csvgen](https://openexchange.intersystems.com/package/csvgen) to create persistent classes and load data from CSV files. 
 
-```objectscript
-do ##class(community.csvgen).Generate("/app/data/train.csv",",","Workshop.Data.MaternalTrain")
+### Train Data
+Create train table:
+```sql
+CREATE TABLE Workshop_Data.MaternalTrain (
+        Age INT,
+        SystolicBP INT,
+        DiastolicBP INT,
+        BS DOUBLE,
+        BodyTemp DOUBLE,
+        HeartRate INT,
+        RiskLevel VARCHAR(255)
+)
 ```
-```objectscript
-do ##class(community.csvgen).Generate("/app/data/test.csv",",","Workshop.Data.MaternalTest")
+
+Load train data:
+```sql
+LOAD DATA FROM FILE '/app/data/train.csv'
+INTO Workshop_Data.MaternalTrain (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
+VALUES (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
+USING {"from":{"file":{"header":true, "charset": "UTF-8"}}}
+```
+
+Display train data:
+```sql
+SELECT * FROM Workshop_Data.MaternalTrain
+```
+
+### Test Data
+Create test table:
+```sql
+CREATE TABLE Workshop_Data.MaternalTest (
+        Age INT,
+        SystolicBP INT,
+        DiastolicBP INT,
+        BS DOUBLE,
+        BodyTemp DOUBLE,
+        HeartRate INT,
+        RiskLevel VARCHAR(255)
+)
+```
+
+Load test data:
+```sql
+LOAD DATA FROM FILE '/app/data/test.csv'
+INTO Workshop_Data.MaternalTest (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
+VALUES (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
+USING {"from":{"file":{"header":true, "charset": "UTF-8"}}}
+```
+
+Display test data:
+```sql
+SELECT * FROM Workshop_Data.MaternalTest
 ```
 
 # (d). Create your model
-IntegratedML feature works directly in SQL. You can use the [SQL Explorer](http://localhost:52773/csp/sys/exp/%25CSP.UI.Portal.SQL.Home.zen?$NAMESPACE=WORKSHOP) in the Management Portal or use an external JDBC tool like SQLTools for VS Code.
+IntegratedML feature works directly in SQL. You can use the [SQL Explorer](http://localhost:52773/csp/sys/exp/%25CSP.UI.Portal.SQL.Home.zen?$NAMESPACE=USER) in the Management Portal or use an external JDBC tool like DBeaver.
 
 Create a model to predict `RiskLevel`:
 
-```
+```sql
 CREATE MODEL MaternalModel PREDICTING (RiskLevel) FROM Workshop_Data.MaternalTrain
 ```
 
 # (e). Training the model
 You can now train the model using the training data
 
-```
+```sql
 TRAIN MODEL MaternalModel
 ```
 
 # (f). Validating the model
 Evaluate the performance of the predictions of your model
 
-```
+```sql
 VALIDATE MODEL MaternalModel FROM Workshop_Data.MaternalTest
 ```
 
