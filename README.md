@@ -14,14 +14,14 @@ After that, you should be able to access to [Management Portal](http://localhost
 
 # Prepare the data
 
-## (a). Check the data
+## Check the data
 We are going to use a dataset about health risks for pregnant patients. Have a look at the details here:
 https://www.kaggle.com/csafrit2/maternal-health-risk-data
 
 We have already included in the repository a [data file](data/maternal_health_risk.csv).
 
 
-## (b). Split training and test data
+## Split training and test data
 We need to split the [data](data/maternal_health_risk.csv) into training and test datasets. Prepare data simply split the data and generate a train and test CSV files. Have a look at the [code](src/Workshop/Util.cls) using Embedded Python.
 
 Run the method in a [WebTerminal](http://localhost:52773/terminal/) session.
@@ -30,10 +30,10 @@ Run the method in a [WebTerminal](http://localhost:52773/terminal/) session.
 do ##class(Workshop.Util).PrepareData()
 ```
 
-## (c). Load CSV files
+## Load CSV files
 We will use [csvgen](https://openexchange.intersystems.com/package/csvgen) to create persistent classes and load data from CSV files. 
 
-### Train Data
+### Train Data
 Create train table:
 ```sql
 CREATE TABLE Workshop_Data.MaternalTrain (
@@ -87,7 +87,7 @@ Display test data:
 SELECT * FROM Workshop_Data.MaternalTest
 ```
 
-# (d). Create your model
+# Create your model
 IntegratedML feature works directly in SQL. You can use the [SQL Explorer](http://localhost:52773/csp/sys/exp/%25CSP.UI.Portal.SQL.Home.zen?$NAMESPACE=USER) in the Management Portal or use an external JDBC tool like DBeaver.
 
 Create a model to predict `RiskLevel`:
@@ -96,14 +96,14 @@ Create a model to predict `RiskLevel`:
 CREATE MODEL MaternalModel PREDICTING (RiskLevel) FROM Workshop_Data.MaternalTrain
 ```
 
-# (e). Training the model
+# Training the model
 You can now train the model using the training data
 
 ```sql
 TRAIN MODEL MaternalModel
 ```
 
-# (f). Validating the model
+# Validating the model
 Evaluate the performance of the predictions of your model
 
 ```sql
@@ -114,7 +114,7 @@ VALIDATE MODEL MaternalModel FROM Workshop_Data.MaternalTest
 SELECT * FROM INFORMATION_SCHEMA.ML_VALIDATION_METRICS
 ```
 
-# (g). Using the model
+# Using the model
 Finally you can run predictions on RiskLevel. Here you can compare the predictions Vs. real data:
 
 ```sql
