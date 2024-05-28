@@ -4,7 +4,7 @@
     },
     "objectscript.conn": {
         "active": true,
-        "ns": "WORKSHOP",
+        "ns": "USER",
         "host": "localhost",
         "port": 52773,
         "username": "superuser",
@@ -16,20 +16,5 @@
             "SOAP Wizard": "${serverUrl}/isc/studio/templates/%25ZEN.Template.AddInWizard.SOAPWizard.cls?Namespace=${namespace}${serverAuth}",
             "WebTerminal": "${serverUrl}/terminal/"
         }
-    },
-    "sqltools.connections": [
-        {
-            "namespace": "WORKSHOP",
-            "connectionMethod": "Server and Port",
-            "showSystem": false,
-            "previewLimit": 50,
-            "server": "localhost",
-            "port": 52773,
-            "askForPassword": false,
-            "driver": "InterSystems IRIS",
-            "name": "localhost",
-            "username": "superuser",
-            "password": "SYS"
-        }
-    ],
+    }
 }
