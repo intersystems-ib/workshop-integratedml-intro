@@ -53,7 +53,7 @@ SELECT * FROM INFORMATION_SCHEMA.ML_VALIDATION_METRICS
 SELECT substring(LOG, 1, 50000) LOG,* FROM INFORMATION_SCHEMA.ML_TRAINING_RUNS
 
 -- predict using model
-SELECT *, PREDICT(MaternalModel) AS PredictedRisk, PROBABILITY(MaternalModel FOR PREDICT(MaternalModel)) FROM Workshop_Data.MaternalTest
+SELECT *, PREDICT(MaternalModel) AS PredictedRisk FROM Workshop_Data.MaternalTest
 
 SELECT *, PREDICT(MaternalModel) AS PredictedRisk, PROBABILITY(MaternalModel FOR 'mid risk') As Probability
 FROM Workshop_Data.MaternalTest 
