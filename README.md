@@ -52,7 +52,7 @@ Load train data:
 LOAD DATA FROM FILE '/app/data/train.csv'
 INTO Workshop_Data.MaternalTrain (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
 VALUES (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
-USING {"from":{"file":{"header":true, "charset": "UTF-8"}}}
+USING {"from":{"file":{"charset": "UTF-8"}}}
 ```
 
 Display train data:
@@ -79,7 +79,7 @@ Load test data:
 LOAD DATA FROM FILE '/app/data/test.csv'
 INTO Workshop_Data.MaternalTest (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
 VALUES (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
-USING {"from":{"file":{"header":true, "charset": "UTF-8"}}}
+USING {"from":{"file":{"charset": "UTF-8"}}}
 ```
 
 Display test data:
@@ -118,5 +118,10 @@ SELECT * FROM INFORMATION_SCHEMA.ML_VALIDATION_METRICS
 Finally you can run predictions on RiskLevel. Here you can compare the predictions Vs. real data:
 
 ```sql
-SELECT *, PREDICT(MaternalModel) AS PredictedRisk FROM Workshop_Data.MaternalTest
+SELECT *, PREDICT(MaternalModel) AS PredictedRisk,PROBABILITY(MaternalModel FOR 'mid risk') As Probability
+FROM Workshop_Data.MaternalTest
+
+SELECT *, PREDICT(MaternalModel) AS PredictedRisk, PROBABILITY(MaternalModel FOR 'mid risk') As Probability
+FROM Workshop_Data.MaternalTest 
+WHERE PROBABILITY(MaternalModel FOR 'mid risk') > 0.7
 ```

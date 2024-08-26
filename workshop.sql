@@ -14,7 +14,7 @@ CREATE TABLE Workshop_Data.MaternalTrain (
 LOAD DATA FROM FILE '/app/data/train.csv'
 INTO Workshop_Data.MaternalTrain (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
 VALUES (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
-USING {"from":{"file":{"header":true, "charset": "UTF-8"}}}
+USING {"from":{"file":{"charset": "UTF-8"}}}
 
 
 SELECT * FROM Workshop_Data.MaternalTrain
@@ -33,7 +33,7 @@ CREATE TABLE Workshop_Data.MaternalTest (
 LOAD DATA FROM FILE '/app/data/test.csv'
 INTO Workshop_Data.MaternalTest (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
 VALUES (Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel)
-USING {"from":{"file":{"header":true, "charset": "UTF-8"}}}
+USING {"from":{"file":{"charset": "UTF-8"}}}
 
 SELECT * FROM Workshop_Data.MaternalTest
 
@@ -53,7 +53,8 @@ SELECT * FROM INFORMATION_SCHEMA.ML_VALIDATION_METRICS
 SELECT substring(LOG, 1, 50000) LOG,* FROM INFORMATION_SCHEMA.ML_TRAINING_RUNS
 
 -- predict using model
-SELECT *, PREDICT(MaternalModel) AS PredictedRisk FROM Workshop_Data.MaternalTest
+SELECT *, PREDICT(MaternalModel) AS PredictedRisk,PROBABILITY(MaternalModel FOR 'mid risk') As Probability
+FROM Workshop_Data.MaternalTest
 
 SELECT *, PREDICT(MaternalModel) AS PredictedRisk, PROBABILITY(MaternalModel FOR 'mid risk') As Probability
 FROM Workshop_Data.MaternalTest 
