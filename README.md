@@ -31,7 +31,6 @@ do ##class(Workshop.Util).PrepareData()
 ```
 
 ## Load CSV files
-We will use [csvgen](https://openexchange.intersystems.com/package/csvgen) to create persistent classes and load data from CSV files. 
 
 ### Train Data
 Create train table:
